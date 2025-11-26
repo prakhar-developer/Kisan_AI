@@ -1,0 +1,9 @@
+{% load i18n %}
+<!-- language_modal.html -->
+<div id="languageModal" class="modal-overlay">
+  <div class="popup">
+    <h2>{% trans "Select Language" %}</h2>
+    <button onclick="setLanguage('en')" class="lang-btn">{% trans "English" %}</button>
+    <button onclick="setLanguage('hi')" class="lang-btn">{% trans "Hindi" %}</button>
+  </div>
+</div>

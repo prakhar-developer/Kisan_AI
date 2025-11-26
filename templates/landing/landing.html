@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Kisan AI - Empowering Agriculture" %}</title>
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+
+<!-- 🌐 Language Selection Popup -->
+<script src="{% static 'js/language_modal.js' %}"></script>
+{% if show_language_modal %}
+{% include "landing/lang_popup.html" %}
+{% endif %}
+<script src="{% static 'js/landing.js' %}"></script>
+<!-- 👨‍🌾 Main Landing Content -->
+<div class="main-content">
+  <h1>{% trans "Welcome to Kisan AI" %}</h1>
+  <p>{% trans "Empowering Farmers, Vendors, Zamindars and Labours" %}</p>
+  <button onclick="window.location.href=&quot;{% url 'core:enter_mobile' %}&quot;">
+    {% trans "Get Started" %}
+  </button>
+</div>
+
+<!-- Inside <head> -->
+<link rel="stylesheet" href="{% static 'css/language_modal.css' %}">
+<!-- Before </body> -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<script type="module" src="{% static 'js/firebase-init.js' %}"></script>
+
+<input type="tel" id="mobile" placeholder="+91XXXXXXXXXX" />
+<div id="recaptcha-container"></div>
+<button id="send-otp-btn">Send OTP</button>
+
+<script type="module">
+import { auth, RecaptchaVerifier, signInWithPhoneNumber } from './js/firebase-init.js';
+
+window.onload = () => {
+  window.recaptcha = new RecaptchaVerifier('recaptcha-container', { size: 'invisible' }, auth);
+};
+
+document.getElementById('send-otp-btn').onclick = () => {
+  const number = document.getElementById('mobile').value;
+  signInWithPhoneNumber(auth, number, window.recaptcha)
+    .then(cr => {
+      window.confirmationResult = cr;
+      sessionStorage.setItem('mobile', number);
+      sessionStorage.setItem('verificationId', cr.verificationId);
+      window.location = "{% url 'core:verify_otp' %}";
+    })
+    .catch(err => alert(err.message));
+};
+</script>
